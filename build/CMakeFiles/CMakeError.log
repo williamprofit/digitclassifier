@@ -1,0 +1,506 @@
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wshorten64to32 failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b00ab/fast"
+/usr/bin/make -f CMakeFiles/cmTC_b00ab.dir/build.make CMakeFiles/cmTC_b00ab.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b00ab.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wshorten64to32 -Werror   -Wshorten-64-to-32 -o CMakeFiles/cmTC_b00ab.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wshorten-64-to-32'
+make[1]: *** [CMakeFiles/cmTC_b00ab.dir/build.make:66: CMakeFiles/cmTC_b00ab.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_b00ab/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wenumconversion failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_56d08/fast"
+/usr/bin/make -f CMakeFiles/cmTC_56d08.dir/build.make CMakeFiles/cmTC_56d08.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_56d08.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wenumconversion -Werror   -Wenum-conversion -o CMakeFiles/cmTC_56d08.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wenum-conversion'; did you mean '-Wno-conversion'?
+make[1]: *** [CMakeFiles/cmTC_56d08.dir/build.make:66: CMakeFiles/cmTC_56d08.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_56d08/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wcpp11extensions failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_dd1c0/fast"
+/usr/bin/make -f CMakeFiles/cmTC_dd1c0.dir/build.make CMakeFiles/cmTC_dd1c0.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_dd1c0.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wcpp11extensions -Werror   -Wc++11-extensions -o CMakeFiles/cmTC_dd1c0.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wc++11-extensions'; did you mean '-fms-extensions'?
+make[1]: *** [CMakeFiles/cmTC_dd1c0.dir/build.make:66: CMakeFiles/cmTC_dd1c0.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_dd1c0/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd981 failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_c6534/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c6534.dir/build.make CMakeFiles/cmTC_c6534.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c6534.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd981 -Werror   -wd981 -o CMakeFiles/cmTC_c6534.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd981'
+make[1]: *** [CMakeFiles/cmTC_c6534.dir/build.make:66: CMakeFiles/cmTC_c6534.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_c6534/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd2304 failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_360e4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_360e4.dir/build.make CMakeFiles/cmTC_360e4.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_360e4.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd2304 -Werror   -wd2304 -o CMakeFiles/cmTC_360e4.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd2304'
+make[1]: *** [CMakeFiles/cmTC_360e4.dir/build.make:66: CMakeFiles/cmTC_360e4.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_360e4/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_STRICTANSI failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_bd73f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_bd73f.dir/build.make CMakeFiles/cmTC_bd73f.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bd73f.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_STRICTANSI -Werror   -strict-ansi -o CMakeFiles/cmTC_bd73f.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-strict-ansi'; did you mean '-fstrict-enums'?
+make[1]: *** [CMakeFiles/cmTC_bd73f.dir/build.make:66: CMakeFiles/cmTC_bd73f.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_bd73f/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Qunusedarguments failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ff56b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ff56b.dir/build.make CMakeFiles/cmTC_ff56b.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ff56b.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_Qunusedarguments -Werror   -Qunused-arguments -o CMakeFiles/cmTC_ff56b.dir/src.cxx.o -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Qunused-arguments'; did you mean '-Wunused-parameter'?
+make[1]: *** [CMakeFiles/cmTC_ff56b.dir/build.make:66: CMakeFiles/cmTC_ff56b.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_ff56b/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_399ea/fast"
+/usr/bin/make -f CMakeFiles/cmTC_399ea.dir/build.make CMakeFiles/cmTC_399ea.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_399ea.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_399ea.dir/CheckSymbolExists.c.o   -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_399ea
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_399ea.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_399ea.dir/CheckSymbolExists.c.o  -o cmTC_399ea 
+CMakeFiles/cmTC_399ea.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_399ea.dir/build.make:87: cmTC_399ea] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_399ea/fast] Error 2
+
+File /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_fecbb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_fecbb.dir/build.make CMakeFiles/cmTC_fecbb.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fecbb.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_fecbb.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.11/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fecbb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fecbb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_fecbb.dir/CheckFunctionExists.c.o  -o cmTC_fecbb -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_fecbb.dir/build.make:87: cmTC_fecbb] Error 1
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_fecbb/fast] Error 2
+
+
+Determining if the Fortran sgemm exists failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_80886/fast"
+/usr/bin/make -f CMakeFiles/cmTC_80886.dir/build.make CMakeFiles/cmTC_80886.dir/build
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_80886.dir/testFortranCompiler.f.o
+CMAKE_Fortran_COMPILER-NOTFOUND    -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTC_80886.dir/testFortranCompiler.f.o
+make[1]: CMAKE_Fortran_COMPILER-NOTFOUND: Command not found
+make[1]: *** [CMakeFiles/cmTC_80886.dir/build.make:66: CMakeFiles/cmTC_80886.dir/testFortranCompiler.f.o] Error 127
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_80886/fast] Error 2
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Determining if the Fortran sgemm exists failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2ca0a/fast"
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_2ca0a.dir/build.make CMakeFiles/cmTC_2ca0a.dir/build
+make[2]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_2ca0a.dir/testFortranCompiler.f.o
+CMAKE_Fortran_COMPILER-NOTFOUND    -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTC_2ca0a.dir/testFortranCompiler.f.o
+make[2]: CMAKE_Fortran_COMPILER-NOTFOUND: Command not found
+make[2]: *** [CMakeFiles/cmTC_2ca0a.dir/build.make:66: CMakeFiles/cmTC_2ca0a.dir/testFortranCompiler.f.o] Error 127
+make[2]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:126: cmTC_2ca0a/fast] Error 2
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Determining if the Fortran sgemm exists failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_25b60/fast"
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_25b60.dir/build.make CMakeFiles/cmTC_25b60.dir/build
+make[2]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_25b60.dir/testFortranCompiler.f.o
+CMAKE_Fortran_COMPILER-NOTFOUND    -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTC_25b60.dir/testFortranCompiler.f.o
+make[2]: CMAKE_Fortran_COMPILER-NOTFOUND: Command not found
+make[2]: *** [CMakeFiles/cmTC_25b60.dir/build.make:66: CMakeFiles/cmTC_25b60.dir/testFortranCompiler.f.o] Error 127
+make[2]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:126: cmTC_25b60/fast] Error 2
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp 
+
+The output was:
+No such file or directory
+
+
+Determining if the Fortran sgemm exists failed with the following output:
+Change Dir: /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b7507/fast"
+make[1]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_b7507.dir/build.make CMakeFiles/cmTC_b7507.dir/build
+make[2]: Entering directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_b7507.dir/testFortranCompiler.f.o
+CMAKE_Fortran_COMPILER-NOTFOUND    -c /home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTC_b7507.dir/testFortranCompiler.f.o
+make[2]: CMAKE_Fortran_COMPILER-NOTFOUND: Command not found
+make[2]: *** [CMakeFiles/cmTC_b7507.dir/build.make:66: CMakeFiles/cmTC_b7507.dir/testFortranCompiler.f.o] Error 127
+make[2]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:126: cmTC_b7507/fast] Error 2
+make[1]: Leaving directory '/home/william/Documents/Dev/digitclassifier/build/CMakeFiles/CMakeTmp'
+
+

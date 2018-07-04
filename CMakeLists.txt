@@ -14,15 +14,15 @@ endif(NOT CMAKE_BUILD_TYPE)
 set (H
     #   H/NeuralNetwork.h
     #   H/Layer.h
-    #   H/ActivationFunc.h
-    #   H/SigmoidFunc.h
+        H/ActivationFunc.h
+        H/SigmoidFunc.h
         H/ReLUFunc.h)
 
 set (src
         src/main.cpp
     #   src/NeuralNetwork.cpp
     #   src/Layer.cpp
-    #   src/SigmoidFunc.cpp
+        src/SigmoidFunc.cpp
         src/ReLUFunc.cpp)
 
 # Linking

@@ -1,4 +1,0 @@
-# Target labels
- BuildOfficial
-# Source files and their labels
-/home/william/Documents/Dev/digitclassifier/thirdparty/Eigen3/test/product_large.cpp

@@ -1,12 +1,12 @@
 #include <ReLUFunc.h>
 #include <algorithm>
 
-float ReLUFunc(float activation)
+float ReLU(float activation)
 {
     return std::max(0.0f, activation);
 }
 
-float ReLUFuncDerivative(float activation)
+float ReLUDerivative(float activation)
 {
     if (activation > 0.0f)
         return 1.0f;

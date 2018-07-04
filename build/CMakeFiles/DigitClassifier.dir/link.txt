@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/DigitClassifier.dir/src/main.cpp.o CMakeFiles/DigitClassifier.dir/src/ReLUFunc.cpp.o  -o DigitClassifier 

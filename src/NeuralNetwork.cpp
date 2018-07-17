@@ -1,6 +1,8 @@
 #include <NeuralNetwork.h>
 #include <iostream>
 #include <ctime>
+#include <fstream>
+#include <EigenFileIO.h>
 
 using namespace Eigen;
 
@@ -105,24 +107,137 @@ void NeuralNetwork::backpropagateError(float learningRate, const VectorXf& error
 	this->m_layers.back().applyGradients(learningRate);
 }
 
-VectorXf NeuralNetwork::computeError(const VectorXf& output, const VectorXf& expected, LossFunc lossFunc)
+VectorXf NeuralNetwork::computeError(const VectorXf& output, const VectorXf& expected, LossFuncEnum lossFunc)
 {
 	VectorXf error = VectorXf::Zero(output.size());
 
 	for (unsigned int i = 0; i < output.size(); i++)
-		error[i] = lossFunc.func(output[i], expected[i]);
+		error[i] = LossFuncTable[lossFunc].func(output[i], expected[i]);
 
 	return error;
 }
 
-VectorXf NeuralNetwork::computeErrorGradient(const VectorXf& output, const VectorXf& expected, LossFunc lossFunc)
+VectorXf NeuralNetwork::computeErrorGradient(const VectorXf& output, const VectorXf& expected, LossFuncEnum lossFunc)
 {
 	VectorXf errorGradient = VectorXf::Zero(output.size());
 
 	for (unsigned int i = 0; i < output.size(); i++)
-		errorGradient[i] = lossFunc.derivative(output[i], expected[i]);
+		errorGradient[i] = LossFuncTable[lossFunc].derivative(output[i], expected[i]);
 
 	return errorGradient;
+}
+
+float NeuralNetwork::test(const std::vector<VectorXf>& input, const std::vector<VectorXf>& expected, LossFuncEnum lossFunc)
+{
+	float startTime = std::clock();
+
+	float avgError;
+	VectorXf totalError = VectorXf::Zero(expected[0].size());
+
+	for (unsigned int i = 0; i < input.size(); i++)
+	{
+		this->feedforward(input[i]);
+		VectorXf output = this->getOutput();
+
+		VectorXf error = this->computeError(output, expected[i], lossFunc);
+
+		std::cout << "Test " << i+1 << "/" << input.size() << " error: " << error.sum() << "\n";
+
+		totalError += error;
+	}
+
+	avgError = totalError.sum() / input.size();
+
+	std::cout << "*** End of testing after " << (std::clock() - startTime) * 0.001 << "s, average error: " << avgError << "\n";
+
+	return avgError;
+}
+
+bool NeuralNetwork::load(std::string path)
+{
+	std::ifstream file(path, std::ios::binary);
+
+	if (!file.is_open())
+	{
+		std::cout << "Failed to open file " << path << " for loading.\n";
+		return false;
+	}
+
+	uint32_t layerCount;
+	file.read((char*)&layerCount, sizeof(layerCount));
+
+	for (uint32_t i = 0; i < layerCount; i++)
+		this->loadLayer(file);
+
+	for (unsigned int i = 0; i < m_layers.size(); i++)
+	{
+		Layer* prevLayer = nullptr;
+		if (i > 0)
+			prevLayer = &m_layers[i - 1];
+
+		m_layers[i].setPrevLayer(prevLayer);
+	}
+
+	file.close();
+
+	return true;
+}
+
+void NeuralNetwork::loadLayer(std::ifstream& stream)
+{
+	Layer layer;
+
+	uint32_t layerSize;
+	int8_t activationFunc;
+
+	stream.read((char*)&layerSize, sizeof(layerSize));
+	stream.read((char*)&activationFunc, sizeof(activationFunc));
+
+	layer.create(layerSize, ActivationFuncEnum(activationFunc));
+
+	MatrixXf weights;
+	VectorXf biases;
+
+	readMatrixBinary(stream, weights);
+	readVectorBinary(stream, biases);
+
+	layer.setWeights(weights);
+	layer.setBiases(biases);
+
+	this->addLayer(layer);
+}
+
+bool NeuralNetwork::save(std::string path)
+{
+	std::ofstream file(path, std::ios::binary | std::ios::trunc);
+
+	if (!file.is_open())
+	{
+		std::cout << "Failed to create file " << path << " for saving.\n";
+		return false;
+	}
+
+	uint32_t layerCount = (uint32_t)m_layers.size();
+	file.write((char*)&layerCount, sizeof(layerCount));
+	
+	for (uint32_t i = 0; i < layerCount; i++)
+		this->saveLayer(file, &m_layers[i]);
+
+	file.close();
+
+	return true;
+}
+
+void NeuralNetwork::saveLayer(std::ofstream& stream, Layer* layer)
+{
+	uint32_t layerSize = (uint32_t)layer->getSize();
+	int8_t	activationFunc = (int8_t)layer->getActivationFunc();
+
+	stream.write((char*)&layerSize, sizeof(layerSize));
+	stream.write((char*)&activationFunc, sizeof(activationFunc));
+
+	writeMatrixBinary(stream, layer->getWeights());
+	writeVectorBinary(stream, layer->getBiases());
 }
 
 VectorXf NeuralNetwork::getOutput()

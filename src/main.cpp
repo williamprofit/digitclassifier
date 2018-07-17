@@ -1,53 +1,36 @@
 #include <iostream>
 #include <Eigen/Dense>
 
-#include <SigmoidFunc.h>
-#include <TanhFunc.h>
-#include <ReLUFunc.h>
-#include <Layer.h>
-#include <CrossEntropyFunc.h>
 #include <NeuralNetwork.h>
-#include <MSEFunc.h>
+#include <MNISTLoader.h>
 
 int main()
 {
+	MNISTLoader mnist;
+	mnist.load("../res/MNIST");
+
     NeuralNetwork nn;
-    Layer l1(5, ActivationFunc());
-    Layer l2(3, SigmoidFunc());
+    Layer l1(784, ActivationFuncEnum::ACT_NONE);
+	Layer l2(15, ActivationFuncEnum::ACT_TANH);
+    Layer l3(10, ActivationFuncEnum::ACT_SIGMOID);
 
     nn.addLayer(l1);
     nn.addLayer(l2);
+	nn.addLayer(l3);
     nn.init();
 
-
-	Eigen::VectorXf inputModel(5);
-	inputModel << 0.1, 0.2, 0.3, 0.4, 0.5;
-	std::vector<Eigen::VectorXf> input(100, inputModel);
-
-	Eigen::VectorXf outputModel(3);
-	outputModel << 0.42, 0.9, 0.42;
-	std::vector<Eigen::VectorXf> output(100, outputModel);
-
-
 	TrainingInfo trainingInfo;
-	trainingInfo.learningRate	= 0.1;
+	trainingInfo.learningRate	= 0.1f;
 	trainingInfo.batchSize		= 5;
-	trainingInfo.epochCount		= 10;
-	trainingInfo.input			= &input;
-	trainingInfo.expected		= &output;
-	trainingInfo.lossFunc		= CrossEntropyFunc();
+	trainingInfo.epochCount		= 1;
+	trainingInfo.input			= &mnist.getTrainImages();
+	trainingInfo.expected		= &mnist.getTrainLabels();
+	trainingInfo.lossFunc		= LossFuncEnum::LOS_MSE;
 
-	std::cout << "--- TEST ---" << std::endl;
-	nn.feedforward(inputModel);
-	std::cout << nn.getOutput() << std::endl;
-
-	
 	nn.train(trainingInfo);
+	nn.test(mnist.getTestImages(), mnist.getTestLabels(), LossFuncEnum::LOS_MSE);
 
-
-	std::cout << "--- TEST ---" << std::endl;
-	nn.feedforward(inputModel);
-	std::cout << nn.getOutput() << std::endl;
+	nn.save("../res/save1");
 
 	system("pause");
 

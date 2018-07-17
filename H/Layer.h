@@ -2,16 +2,16 @@
 #define H_LAYER
 
 #include <Eigen/Dense>
-#include <ActivationFunc.h>
+#include <ActivationFuncTable.h>
 
 class Layer
 {
 public:
     Layer();
-    Layer(int size, ActivationFunc activationFunc);
+    Layer(int size, ActivationFuncEnum activationFunc);
     virtual ~Layer();
 
-    virtual void create(int size, ActivationFunc activationFunc);
+    virtual void create(int size, ActivationFuncEnum activationFunc);
     virtual void init(Layer* previousLayer);
 
     virtual void fire();
@@ -22,12 +22,15 @@ public:
     virtual void setActivation(const Eigen::VectorXf& activation);
 	virtual void setWeights(const Eigen::MatrixXf& weights);
 	virtual void setBiases(const Eigen::VectorXf& biases);
+	virtual void setActivationFunc(ActivationFuncEnum activationFunc);
+	virtual void setPrevLayer(Layer* prevLayer);
 
 	virtual Eigen::VectorXf& getIntegration();
 	virtual Eigen::VectorXf& getActivation();
 	virtual Eigen::MatrixXf& getWeights();
 	virtual Eigen::VectorXf& getBiases();
 	virtual int getSize();
+	virtual ActivationFuncEnum getActivationFunc();
 
     virtual void printActivation();
 
@@ -38,7 +41,7 @@ protected:
     int m_size;
     Layer* m_prevLayer;
 
-    ActivationFunc m_activationFunc;
+    ActivationFuncEnum m_activationFunc;
 
 	Eigen::VectorXf m_integrations; /* z = WX+b, integration of values sent to node */
     Eigen::VectorXf m_activations;	/* a = g(z), where g is activationFunc */

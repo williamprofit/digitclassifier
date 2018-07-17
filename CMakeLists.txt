@@ -16,12 +16,16 @@ set (H
 		H/TrainingInfo.h
         H/Layer.h
         H/ActivationFunc.h
+		H/ActivationFuncTable.h
         H/SigmoidFunc.h
         H/ReLUFunc.h
 		H/TanhFunc.h
 		H/LossFunc.h
+		H/LossFuncTable.h
 		H/CrossEntropyFunc.h
-		H/MSEFunc.h)
+		H/MSEFunc.h
+		H/MNISTLoader.h
+		H/EigenFileIO.h)
 
 set (src
         src/main.cpp
@@ -31,7 +35,9 @@ set (src
         src/ReLUFunc.cpp
 		src/TanhFunc.cpp
 		src/CrossEntropyFunc.cpp
-		src/MSEFunc.cpp)
+		src/MSEFunc.cpp
+		src/MNISTLoader.cpp
+		src/EigenFileIO.cpp)
 
 # Linking
 include_directories(H/)

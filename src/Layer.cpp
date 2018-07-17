@@ -7,7 +7,7 @@ Layer::Layer() : m_prevLayer(nullptr)
 {
 }
 
-Layer::Layer(int size, ActivationFunc activationFunc)
+Layer::Layer(int size, ActivationFuncEnum activationFunc)
 {
     this->create(size, activationFunc);
 }
@@ -17,7 +17,7 @@ Layer::~Layer()
 	m_prevLayer = nullptr;
 }
 
-void Layer::create(int size, ActivationFunc activationFunc)
+void Layer::create(int size, ActivationFuncEnum activationFunc)
 {
     m_size = size;
     m_activationFunc = activationFunc;
@@ -49,7 +49,7 @@ void Layer::computeGradients(const Eigen::VectorXf& daIn)
 		return;
 
 	/* dz = g'(a) * da[l+1] */
-	VectorXf dz = m_integrations.unaryExpr(m_activationFunc.derivative);
+	VectorXf dz = m_integrations.unaryExpr(ActivationFuncTable[m_activationFunc].derivative);
 			 dz = dz.cwiseProduct(daIn);
 
 	/* da = wT x dz */
@@ -78,7 +78,7 @@ void Layer::computeActivation()
 
 void Layer::applyActivationFunc()
 {
-    m_activations = m_integrations.unaryExpr(m_activationFunc.func);
+    m_activations = m_integrations.unaryExpr(ActivationFuncTable[m_activationFunc].func);
 }
 
 void Layer::setActivation(const VectorXf& activation)
@@ -94,6 +94,16 @@ void Layer::setWeights(const MatrixXf& weights)
 void Layer::setBiases(const VectorXf& biases)
 {
 	m_biases = biases;
+}
+
+void Layer::setActivationFunc(ActivationFuncEnum activationFunc)
+{
+	m_activationFunc = activationFunc;
+}
+
+void Layer::setPrevLayer(Layer* prevLayer)
+{
+	m_prevLayer = prevLayer;
 }
 
 int Layer::getSize()
@@ -114,6 +124,11 @@ VectorXf& Layer::getActivation()
 MatrixXf& Layer::getWeights()
 {
 	return m_weights;
+}
+
+ActivationFuncEnum Layer::getActivationFunc()
+{
+	return m_activationFunc;
 }
 
 VectorXf& Layer::getBiases()

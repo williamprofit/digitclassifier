@@ -2,7 +2,7 @@
 #define H_TRAINING_INFO
 
 #include <Eigen/Dense>
-#include <LossFunc.h>
+#include <LossFuncTable.h>
 #include <vector>
 
 struct TrainingInfo
@@ -14,7 +14,7 @@ struct TrainingInfo
 	std::vector<Eigen::VectorXf>* input;
 	std::vector<Eigen::VectorXf>* expected;
 
-	LossFunc lossFunc;
+	LossFuncEnum lossFunc;
 };
 
 #endif

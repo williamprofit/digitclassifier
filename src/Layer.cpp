@@ -14,6 +14,7 @@ Layer::Layer(int size, ActivationFunc activationFunc)
 
 Layer::~Layer()
 {
+	m_prevLayer = nullptr;
 }
 
 void Layer::create(int size, ActivationFunc activationFunc)
@@ -42,15 +43,57 @@ void Layer::fire()
         this->computeActivation();
 }
 
+void Layer::computeGradients(const Eigen::VectorXf& daIn)
+{
+	if (m_prevLayer == nullptr)
+		return;
+
+	/* dz = g'(a) * da[l+1] */
+	VectorXf dz = m_integrations.unaryExpr(m_activationFunc.derivative);
+			 dz = dz.cwiseProduct(daIn);
+
+	/* da = wT x dz */
+	VectorXf da = m_weights.transpose() * dz;
+
+	/* dw = dz x a[l-1]T */
+	m_weightsGradient = dz * m_prevLayer->getActivation().transpose();
+
+	/* db = dz */
+	m_biasesGradient  = dz;
+
+	m_prevLayer->computeGradients(da);
+}
+
+void Layer::applyGradients(float learningRate)
+{
+	m_weights -= learningRate * m_weightsGradient;
+	m_biases  -= learningRate * m_biasesGradient;
+}
+
 void Layer::computeActivation()
 {
-    m_activations = m_weights * m_prevLayer->getActivation() + m_biases;
+    m_integrations = m_weights * m_prevLayer->getActivation() + m_biases;
     this->applyActivationFunc();
 }
 
 void Layer::applyActivationFunc()
 {
-    m_activations = m_activations.unaryExpr(m_activationFunc.func);
+    m_activations = m_integrations.unaryExpr(m_activationFunc.func);
+}
+
+void Layer::setActivation(const VectorXf& activation)
+{
+	m_activations = activation;
+}
+
+void Layer::setWeights(const MatrixXf& weights)
+{
+	m_weights = weights;
+}
+
+void Layer::setBiases(const VectorXf& biases)
+{
+	m_biases = biases;
 }
 
 int Layer::getSize()
@@ -58,14 +101,24 @@ int Layer::getSize()
     return m_size;
 }
 
-VectorXf Layer::getActivation()
+VectorXf& Layer::getIntegration()
+{
+	return m_integrations;
+}
+
+VectorXf& Layer::getActivation()
 {
     return m_activations;
 }
 
-void Layer::setActivation(VectorXf activation)
+MatrixXf& Layer::getWeights()
 {
-    m_activations = activation;
+	return m_weights;
+}
+
+VectorXf& Layer::getBiases()
+{
+	return m_biases;
 }
 
 void Layer::printActivation()

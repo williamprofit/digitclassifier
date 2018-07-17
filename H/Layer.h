@@ -16,10 +16,18 @@ public:
 
     virtual void fire();
 
-    virtual int getSize();
-    virtual Eigen::VectorXf getActivation();
+	virtual void computeGradients(const Eigen::VectorXf& daIn);
+	virtual void applyGradients(float learningRate);
 
-    virtual void setActivation(Eigen::VectorXf activation);
+    virtual void setActivation(const Eigen::VectorXf& activation);
+	virtual void setWeights(const Eigen::MatrixXf& weights);
+	virtual void setBiases(const Eigen::VectorXf& biases);
+
+	virtual Eigen::VectorXf& getIntegration();
+	virtual Eigen::VectorXf& getActivation();
+	virtual Eigen::MatrixXf& getWeights();
+	virtual Eigen::VectorXf& getBiases();
+	virtual int getSize();
 
     virtual void printActivation();
 
@@ -32,9 +40,13 @@ protected:
 
     ActivationFunc m_activationFunc;
 
-    Eigen::VectorXf m_activations;
+	Eigen::VectorXf m_integrations; /* z = WX+b, integration of values sent to node */
+    Eigen::VectorXf m_activations;	/* a = g(z), where g is activationFunc */
     Eigen::MatrixXf m_weights;
     Eigen::VectorXf m_biases;
+
+	Eigen::MatrixXf m_weightsGradient;
+	Eigen::VectorXf m_biasesGradient;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include <SigmoidFunc.h>
-#include <math.h>
+#include <cmath>
 
 float sigmoid(float activation)
 {
@@ -8,5 +8,5 @@ float sigmoid(float activation)
 
 float sigmoidDerivative(float activation)
 {
-    return sigmoid(activation) * (1 - sigmoid(activation));
+    return sigmoid(activation) * (1.0f - sigmoid(activation));
 }

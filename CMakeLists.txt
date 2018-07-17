@@ -13,17 +13,25 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 set (H
         H/NeuralNetwork.h
+		H/TrainingInfo.h
         H/Layer.h
         H/ActivationFunc.h
         H/SigmoidFunc.h
-        H/ReLUFunc.h)
+        H/ReLUFunc.h
+		H/TanhFunc.h
+		H/LossFunc.h
+		H/CrossEntropyFunc.h
+		H/MSEFunc.h)
 
 set (src
         src/main.cpp
         src/NeuralNetwork.cpp
         src/Layer.cpp
         src/SigmoidFunc.cpp
-        src/ReLUFunc.cpp)
+        src/ReLUFunc.cpp
+		src/TanhFunc.cpp
+		src/CrossEntropyFunc.cpp
+		src/MSEFunc.cpp)
 
 # Linking
 include_directories(H/)

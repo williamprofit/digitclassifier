@@ -3,8 +3,10 @@
 
 #include <LossFunc.h>
 
-float MSE(float predicted, float expected);
-float MSEDerivative(float predicted, float expected);
+
+Eigen::VectorXf MSE(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+Eigen::VectorXf MSEDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+
 
 class MSEFunc : public LossFunc
 {

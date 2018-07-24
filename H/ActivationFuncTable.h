@@ -5,12 +5,14 @@
 #include <SigmoidFunc.h>
 #include <ReLUFunc.h>
 #include <TanhFunc.h>
+#include <SoftmaxFunc.h>
 
-static ActivationFunc ActivationFuncTable[] = 
+static ActivationFunc ActivationFuncTable[] =
 {
 	SigmoidFunc(),
 	ReLUFunc(),
-	TanhFunc()
+	TanhFunc(),
+	SoftmaxFunc()
 };
 
 enum ActivationFuncEnum
@@ -18,7 +20,8 @@ enum ActivationFuncEnum
 	ACT_NONE	= -1,
 	ACT_SIGMOID = 0,
 	ACT_RELU	= 1,
-	ACT_TANH	= 2
+	ACT_TANH	= 2,
+	ACT_SOFTMAX = 3
 };
 
 #endif

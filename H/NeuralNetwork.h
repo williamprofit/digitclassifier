@@ -34,6 +34,8 @@ protected:
 	virtual void loadLayer(std::ifstream& stream);
 	virtual void saveLayer(std::ofstream& stream, Layer* layer);
 
+	virtual bool isPredictionCorrect(const Eigen::VectorXf& prediction, const Eigen::VectorXf& expected);
+
     std::vector<Layer> m_layers;
 };
 

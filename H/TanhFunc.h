@@ -4,14 +4,17 @@
 #include <ActivationFunc.h>
 #include <cmath>
 
-float tanhDerivative(float activation);
+
+Eigen::VectorXf myTanh(const Eigen::VectorXf& activation);
+Eigen::VectorXf tanhDerivative(const Eigen::VectorXf& activation);
+
 
 class TanhFunc : public ActivationFunc
 {
 public:
 	TanhFunc()
 	{
-		func = &std::tanh;
+		func = &myTanh;
 		derivative = &tanhDerivative;
 	}
 };

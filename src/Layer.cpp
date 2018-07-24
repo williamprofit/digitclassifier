@@ -7,7 +7,7 @@ Layer::Layer() : m_prevLayer(nullptr)
 {
 }
 
-Layer::Layer(int size, ActivationFuncEnum activationFunc)
+Layer::Layer(unsigned int size, ActivationFuncEnum activationFunc)
 {
     this->create(size, activationFunc);
 }
@@ -17,7 +17,7 @@ Layer::~Layer()
 	m_prevLayer = nullptr;
 }
 
-void Layer::create(int size, ActivationFuncEnum activationFunc)
+void Layer::create(unsigned int size, ActivationFuncEnum activationFunc)
 {
     m_size = size;
     m_activationFunc = activationFunc;
@@ -43,14 +43,24 @@ void Layer::fire()
         this->computeActivation();
 }
 
+void Layer::computeActivation()
+{
+	m_integrations = m_weights * m_prevLayer->getActivation() + m_biases;
+	this->applyActivationFunc();
+}
+
+void Layer::applyActivationFunc()
+{
+	m_activations = ActivationFuncTable[m_activationFunc].func(m_integrations);
+}
+
 void Layer::computeGradients(const Eigen::VectorXf& daIn)
 {
 	if (m_prevLayer == nullptr)
 		return;
 
 	/* dz = g'(a) * da[l+1] */
-	VectorXf dz = m_integrations.unaryExpr(ActivationFuncTable[m_activationFunc].derivative);
-			 dz = dz.cwiseProduct(daIn);
+	VectorXf dz = ActivationFuncTable[m_activationFunc].derivative(m_integrations).cwiseProduct(daIn);
 
 	/* da = wT x dz */
 	VectorXf da = m_weights.transpose() * dz;
@@ -66,19 +76,13 @@ void Layer::computeGradients(const Eigen::VectorXf& daIn)
 
 void Layer::applyGradients(float learningRate)
 {
+	if (m_prevLayer == nullptr)
+		return;
+
 	m_weights -= learningRate * m_weightsGradient;
 	m_biases  -= learningRate * m_biasesGradient;
-}
 
-void Layer::computeActivation()
-{
-    m_integrations = m_weights * m_prevLayer->getActivation() + m_biases;
-    this->applyActivationFunc();
-}
-
-void Layer::applyActivationFunc()
-{
-    m_activations = m_integrations.unaryExpr(ActivationFuncTable[m_activationFunc].func);
+	m_prevLayer->applyGradients(learningRate);
 }
 
 void Layer::setActivation(const VectorXf& activation)
@@ -106,7 +110,7 @@ void Layer::setPrevLayer(Layer* prevLayer)
 	m_prevLayer = prevLayer;
 }
 
-int Layer::getSize()
+unsigned int Layer::getSize()
 {
     return m_size;
 }

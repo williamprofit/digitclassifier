@@ -33,7 +33,11 @@ void NeuralNetwork::init()
 
 void NeuralNetwork::feedforward(const VectorXf& input)
 {
-    if (m_layers.size() == 0) return;
+	if (m_layers.size() < 2)
+	{
+		std::cout << "Error: invalid neural network (size < 2), can't feedforward\n";
+		return;
+	}
 
     m_layers[0].setActivation(input);
 
@@ -61,7 +65,8 @@ void NeuralNetwork::trainForEpoch(const TrainingInfo& trainingInfo)
 	for (unsigned int i = 0; i < trainingInfo.input->size() - 1; i += batchSize)
 	{
 		std::cout << "- Batch " << i / trainingInfo.batchSize << "/" << std::ceil(trainingInfo.input->size() / trainingInfo.batchSize) << " -\n";
-		/* Make sure we don't overflow */
+
+		/* Make sure the batch doesn't overflow */
 		if (i + trainingInfo.batchSize >= trainingInfo.input->size())
 			batchSize = trainingInfo.input->size() - i - 1;
 
@@ -75,7 +80,7 @@ void NeuralNetwork::trainForEpoch(const TrainingInfo& trainingInfo)
 
 void NeuralNetwork::trainForBatch(const TrainingInfo& trainingInfo, const std::vector<Eigen::VectorXf> batchInput, const std::vector<Eigen::VectorXf> batchExpected)
 {
-	VectorXf batchError = VectorXf::Zero(this->getOutput().size());
+	VectorXf batchError			= VectorXf::Zero(this->getOutput().size());
 	VectorXf batchErrorGradient = VectorXf::Zero(this->getOutput().size());
 
 	for (unsigned int i = 0; i < batchInput.size(); i++)
@@ -90,12 +95,10 @@ void NeuralNetwork::trainForBatch(const TrainingInfo& trainingInfo, const std::v
 		batchErrorGradient += exampleErrorGradient;
 	}
 
-	/* Average out error vectors over batch size */
-	batchError /= trainingInfo.batchSize;
-	batchErrorGradient /= trainingInfo.batchSize;
+	batchError /= batchInput.size();
+	batchErrorGradient /= batchInput.size();
 
-	/* Compute average error over all outputs */
-	float avgError = batchError.sum() / batchError.count();
+	float avgError = batchError.sum() / batchError.size();
 	std::cout << "Avg Error:\n" << avgError << '\n';
 
 	this->backpropagateError(trainingInfo.learningRate, batchErrorGradient);
@@ -109,22 +112,12 @@ void NeuralNetwork::backpropagateError(float learningRate, const VectorXf& error
 
 VectorXf NeuralNetwork::computeError(const VectorXf& output, const VectorXf& expected, LossFuncEnum lossFunc)
 {
-	VectorXf error = VectorXf::Zero(output.size());
-
-	for (unsigned int i = 0; i < output.size(); i++)
-		error[i] = LossFuncTable[lossFunc].func(output[i], expected[i]);
-
-	return error;
+	return LossFuncTable[lossFunc].func(output, expected);
 }
 
 VectorXf NeuralNetwork::computeErrorGradient(const VectorXf& output, const VectorXf& expected, LossFuncEnum lossFunc)
 {
-	VectorXf errorGradient = VectorXf::Zero(output.size());
-
-	for (unsigned int i = 0; i < output.size(); i++)
-		errorGradient[i] = LossFuncTable[lossFunc].derivative(output[i], expected[i]);
-
-	return errorGradient;
+	return LossFuncTable[lossFunc].derivative(output, expected);
 }
 
 float NeuralNetwork::test(const std::vector<VectorXf>& input, const std::vector<VectorXf>& expected, LossFuncEnum lossFunc)
@@ -134,23 +127,46 @@ float NeuralNetwork::test(const std::vector<VectorXf>& input, const std::vector<
 	float avgError;
 	VectorXf totalError = VectorXf::Zero(expected[0].size());
 
+	int nbCorrect = 0;
+
 	for (unsigned int i = 0; i < input.size(); i++)
 	{
 		this->feedforward(input[i]);
 		VectorXf output = this->getOutput();
 
 		VectorXf error = this->computeError(output, expected[i], lossFunc);
-
-		std::cout << "Test " << i+1 << "/" << input.size() << " error: " << error.sum() << "\n";
-
 		totalError += error;
+
+
+		std::cout << "Test " << i+1 << "/" << input.size() << " error: " << error.sum() / error.size();
+
+		if (this->isPredictionCorrect(output, expected[i]))
+		{
+			std::cout << " CORRECT";
+			nbCorrect++;
+		}
+		else
+			std::cout << " INCORRECT";
+
+		std::cout << '\n';
 	}
 
-	avgError = totalError.sum() / input.size();
-
-	std::cout << "*** End of testing after " << (std::clock() - startTime) * 0.001 << "s, average error: " << avgError << "\n";
+	avgError = (totalError.sum() / input.size()) / totalError.size();
+	
+	std::cout << "*** End of testing after " << (std::clock() - startTime) * 0.001 << "s, average error: " << avgError << " | Classification rate: " << (float)nbCorrect / input.size() * 100 << "%\n";
 
 	return avgError;
+}
+
+bool NeuralNetwork::isPredictionCorrect(const VectorXf& prediction, const VectorXf& expected)
+{
+	for (int i = 0; i < prediction.size(); i++)
+	{
+		if (prediction(i) == prediction.maxCoeff() && expected(i) == expected.maxCoeff())
+			return true;
+	}
+
+	return false;
 }
 
 bool NeuralNetwork::load(std::string path)

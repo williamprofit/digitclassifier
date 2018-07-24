@@ -2,11 +2,10 @@
 #define H_SIGMOID_FUNC
 
 #include <ActivationFunc.h>
-#include <math.h>
 
 
-float sigmoid(float activation);
-float sigmoidDerivative(float activation);
+Eigen::VectorXf sigmoid(const Eigen::VectorXf& activation);
+Eigen::VectorXf sigmoidDerivative(const Eigen::VectorXf& activation);
 
 
 class SigmoidFunc : public ActivationFunc

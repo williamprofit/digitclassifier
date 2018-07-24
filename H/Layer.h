@@ -8,10 +8,10 @@ class Layer
 {
 public:
     Layer();
-    Layer(int size, ActivationFuncEnum activationFunc);
+    Layer(unsigned int size, ActivationFuncEnum activationFunc);
     virtual ~Layer();
 
-    virtual void create(int size, ActivationFuncEnum activationFunc);
+    virtual void create(unsigned int size, ActivationFuncEnum activationFunc);
     virtual void init(Layer* previousLayer);
 
     virtual void fire();
@@ -29,16 +29,16 @@ public:
 	virtual Eigen::VectorXf& getActivation();
 	virtual Eigen::MatrixXf& getWeights();
 	virtual Eigen::VectorXf& getBiases();
-	virtual int getSize();
+	virtual unsigned int getSize();
 	virtual ActivationFuncEnum getActivationFunc();
 
     virtual void printActivation();
 
 protected:
-    void computeActivation();
-    void applyActivationFunc();
+    virtual void computeActivation();
+    virtual void applyActivationFunc();
 
-    int m_size;
+    unsigned int m_size;
     Layer* m_prevLayer;
 
     ActivationFuncEnum m_activationFunc;

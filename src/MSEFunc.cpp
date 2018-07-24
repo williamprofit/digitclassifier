@@ -1,12 +1,24 @@
 #include <MSEFunc.h>
 #include <cmath>
 
-float MSE(float predicted, float expected)
+float squareMSE(float value);
+
+Eigen::VectorXf MSE(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
 {
-	return 0.5 * std::pow(predicted - expected, 2);
+	Eigen::VectorXf error = 0.5f * (predicted - expected).unaryExpr(&squareMSE);
+
+	return error;
 }
 
-float MSEDerivative(float predicted, float expected)
+Eigen::VectorXf MSEDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
 {
-	return 2.0f * (predicted - expected);
+	Eigen::VectorXf derivative = predicted - expected;
+
+	return derivative;
+}
+
+
+float squareMSE(float value)
+{
+	return std::pow(value, 2.0f);
 }

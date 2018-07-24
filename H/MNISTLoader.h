@@ -9,7 +9,7 @@
 class MNISTLoader
 {
 public:
-	MNISTLoader();
+	MNISTLoader(bool loadTrain = true, bool loadTest = true);
 	~MNISTLoader();
 
 	virtual void load(std::string dirPath);
@@ -35,6 +35,9 @@ protected:
 
 	std::vector<Eigen::VectorXf> m_testImages;
 	std::vector<Eigen::VectorXf> m_testLabels;
+
+	bool m_loadTrain;
+	bool m_loadTest;
 };
 
 #endif

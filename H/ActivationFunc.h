@@ -1,11 +1,13 @@
 #ifndef H_ACTIVATION_FUNC
 #define H_ACTIVATION_FUNC
 
+#include <Eigen/Dense>
+
 class ActivationFunc
 {
 public:
-    float (*func)(float) = nullptr;
-    float (*derivative)(float) = nullptr;
+    Eigen::VectorXf (*func)(const Eigen::VectorXf&) = nullptr;
+    Eigen::VectorXf (*derivative)(const Eigen::VectorXf&) = nullptr;
 };
 
 #endif

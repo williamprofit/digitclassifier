@@ -4,8 +4,8 @@
 #include <ActivationFunc.h>
 
 
-float ReLU(float activation);
-float ReLUDerivative(float activation);
+Eigen::VectorXf ReLU(const Eigen::VectorXf& activation);
+Eigen::VectorXf ReLUDerivative(const Eigen::VectorXf& activation);
 
 
 class ReLUFunc : public ActivationFunc

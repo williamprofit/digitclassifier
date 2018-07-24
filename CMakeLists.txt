@@ -20,12 +20,15 @@ set (H
         H/SigmoidFunc.h
         H/ReLUFunc.h
 		H/TanhFunc.h
+		H/SoftmaxFunc.h
 		H/LossFunc.h
 		H/LossFuncTable.h
 		H/CrossEntropyFunc.h
 		H/MSEFunc.h
 		H/MNISTLoader.h
-		H/EigenFileIO.h)
+		H/EigenFileIO.h
+		H/DigitDrawer.h
+		H/Canvas.h)
 
 set (src
         src/main.cpp
@@ -34,10 +37,13 @@ set (src
         src/SigmoidFunc.cpp
         src/ReLUFunc.cpp
 		src/TanhFunc.cpp
+		src/SoftmaxFunc.cpp
 		src/CrossEntropyFunc.cpp
 		src/MSEFunc.cpp
 		src/MNISTLoader.cpp
-		src/EigenFileIO.cpp)
+		src/EigenFileIO.cpp
+		src/DigitDrawer.cpp
+		src/Canvas.cpp)
 
 # Linking
 include_directories(H/)
@@ -45,4 +51,4 @@ include_directories(H/)
 add_executable(DigitClassifier ${src} ${H})
 
 add_subdirectory(thirdparty)
-target_link_libraries(DigitClassifier eigen)
+target_link_libraries(DigitClassifier eigen sfml-system sfml-graphics)

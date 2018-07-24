@@ -3,8 +3,10 @@
 
 #include <LossFunc.h>
 
-float crossEntropy(float predicted, float expected);
-float crossEntropyDerivative(float predicted, float expected);
+
+Eigen::VectorXf crossEntropy(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+Eigen::VectorXf crossEntropyDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+
 
 class CrossEntropyFunc : public LossFunc
 {

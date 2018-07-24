@@ -1,12 +1,29 @@
 #include <CrossEntropyFunc.h>
 #include <cmath>
 
-float crossEntropy(float predicted, float expected)
+float myLog(float);
+
+Eigen::VectorXf crossEntropy(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
 {
-	return -(expected * std::log(predicted) + (1.0f - expected) * std::log(1.0f - predicted));
+	Eigen::VectorXf ones(predicted.size());
+	ones.setOnes();
+
+	Eigen::VectorXf error = -(expected.cwiseProduct(predicted.unaryExpr(&myLog)) + (ones - expected).cwiseProduct((ones - predicted).unaryExpr(&myLog)));
+	
+	return error;
 }
 
-float crossEntropyDerivative(float predicted, float expected)
+Eigen::VectorXf crossEntropyDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
 {
-	return -(expected / predicted) + (1.0f - expected) / (1.0f - predicted);
+	Eigen::VectorXf ones(predicted.size());
+	ones.setOnes();
+
+	Eigen::VectorXf derivative = -(expected.cwiseQuotient(predicted)) + (ones - expected).cwiseQuotient(ones - predicted);
+	return derivative;
+}
+
+
+float myLog(float value)
+{
+	return std::log(value);
 }

@@ -3,8 +3,10 @@
 
 using namespace Eigen;
 
-MNISTLoader::MNISTLoader()
+MNISTLoader::MNISTLoader(bool loadTrain, bool loadTest)
 {
+	m_loadTrain = loadTrain;
+	m_loadTest  = loadTest;
 }
 
 MNISTLoader::~MNISTLoader()
@@ -15,11 +17,17 @@ void MNISTLoader::load(std::string dirPath)
 {
 	std::cout << "Loading MNIST dataset ...\n";
 
-	this->loadImages(dirPath + "/train-images-idx3-ubyte", m_trainImages);
-	this->loadLabels(dirPath + "/train-labels-idx1-ubyte", m_trainLabels);
+	if (m_loadTrain)
+	{
+		this->loadImages(dirPath + "/train-images-idx3-ubyte", m_trainImages);
+		this->loadLabels(dirPath + "/train-labels-idx1-ubyte", m_trainLabels);
+	}
 
-	this->loadImages(dirPath + "/t10k-images-idx3-ubyte", m_testImages);
-	this->loadLabels(dirPath + "/t10k-labels-idx1-ubyte", m_testLabels);
+	if (m_loadTest)
+	{
+		this->loadImages(dirPath + "/t10k-images-idx3-ubyte", m_testImages);
+		this->loadLabels(dirPath + "/t10k-labels-idx1-ubyte", m_testLabels);
+	}
 
 	std::cout << "Done.\n";
 }

@@ -8,7 +8,7 @@ DigitDrawer::DigitDrawer(float sizeX, float sizeY, bool loadMNIST) : m_mnist(fal
 	m_canvas.setResolution(28, 28);
 	m_canvas.setSize(sizeX, sizeY);
 
-	m_font.loadFromFile("../res/Consolas.ttf");
+	m_font.loadFromFile("../res/Fonts/Consolas.ttf");
 	m_label.setFont(m_font);
 	m_label.setCharacterSize(12);
 

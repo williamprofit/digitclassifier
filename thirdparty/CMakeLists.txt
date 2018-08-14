@@ -7,3 +7,7 @@ target_include_directories(DigitClassifier PUBLIC ${CMAKE_SOURCE_DIR}/thirdparty
 # - SFML - #
 add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/SFML)
 target_include_directories(DigitClassifier PUBLIC ${CMAKE_SOURCE_DIR}/thirdparty/SFML/include)
+
+set(BUILD_TESTING OFF CACHE BOOL OFF FORCE)
+set(SFML_BUILD_AUDIO OFF CACHE BOOL OFF FORCE)
+set(SFML_BUILD_NETWORK OFF CACHE BOOL OFF FORCE)

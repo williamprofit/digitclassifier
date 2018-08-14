@@ -13,7 +13,6 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 set (H
         H/NeuralNetwork.h
-		H/TrainingInfo.h
         H/Layer.h
         H/ActivationFunc.h
 		H/ActivationFuncTable.h
@@ -21,10 +20,13 @@ set (H
         H/ReLUFunc.h
 		H/TanhFunc.h
 		H/SoftmaxFunc.h
+		H/CostFunc.h
 		H/LossFunc.h
 		H/LossFuncTable.h
 		H/CrossEntropyFunc.h
 		H/MSEFunc.h
+		H/Optimizer.h
+		H/SGD.h
 		H/MNISTLoader.h
 		H/EigenFileIO.h
 		H/DigitDrawer.h
@@ -38,8 +40,11 @@ set (src
         src/ReLUFunc.cpp
 		src/TanhFunc.cpp
 		src/SoftmaxFunc.cpp
+		src/CostFunc.cpp
 		src/CrossEntropyFunc.cpp
 		src/MSEFunc.cpp
+		src/Optimizer.cpp
+		src/SGD.cpp
 		src/MNISTLoader.cpp
 		src/EigenFileIO.cpp
 		src/DigitDrawer.cpp

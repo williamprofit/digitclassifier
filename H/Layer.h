@@ -16,9 +16,6 @@ public:
 
     virtual void fire();
 
-	virtual void computeGradients(const Eigen::VectorXf& daIn);
-	virtual void applyGradients(float learningRate);
-
     virtual void setActivation(const Eigen::VectorXf& activation);
 	virtual void setWeights(const Eigen::MatrixXf& weights);
 	virtual void setBiases(const Eigen::VectorXf& biases);

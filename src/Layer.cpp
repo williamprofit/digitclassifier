@@ -54,37 +54,6 @@ void Layer::applyActivationFunc()
 	m_activations = ActivationFuncTable[m_activationFunc].func(m_integrations);
 }
 
-void Layer::computeGradients(const Eigen::VectorXf& daIn)
-{
-	if (m_prevLayer == nullptr)
-		return;
-
-	/* dz = g'(a) * da[l+1] */
-	VectorXf dz = ActivationFuncTable[m_activationFunc].derivative(m_integrations).cwiseProduct(daIn);
-
-	/* da = wT x dz */
-	VectorXf da = m_weights.transpose() * dz;
-
-	/* dw = dz x a[l-1]T */
-	m_weightsGradient = dz * m_prevLayer->getActivation().transpose();
-
-	/* db = dz */
-	m_biasesGradient  = dz;
-
-	m_prevLayer->computeGradients(da);
-}
-
-void Layer::applyGradients(float learningRate)
-{
-	if (m_prevLayer == nullptr)
-		return;
-
-	m_weights -= learningRate * m_weightsGradient;
-	m_biases  -= learningRate * m_biasesGradient;
-
-	m_prevLayer->applyGradients(learningRate);
-}
-
 void Layer::setActivation(const VectorXf& activation)
 {
 	m_activations = activation;

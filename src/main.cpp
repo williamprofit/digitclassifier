@@ -31,15 +31,15 @@ void train()
 	nn.addLayer(l1);
 	nn.addLayer(l2);
 	nn.addLayer(l3);
-	nn.init();
+	nn.init(true);
 
-	CostFunc costFunc(LossFuncEnum::LOS_MSE);
+	CostFunc costFunc(LossFuncEnum::LOS_CROSS_ENTROPY);
 
 	SGD optimizer;
 	optimizer.setEpochCount(30);
 	optimizer.setBatchSize(10);
 	optimizer.setCostFunc(&costFunc);
-	optimizer.setLearningRate(3.0f);
+	optimizer.setLearningRate(0.5f);
 	optimizer.setTrainingInput(&mnist.getTrainImages());
 	optimizer.setTrainingOutput(&mnist.getTrainLabels());
 

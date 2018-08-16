@@ -13,7 +13,7 @@ public:
 
     virtual void addLayer(const Layer& layer);
 
-    virtual void init();
+    virtual void init(bool deepNetwork = true);
     virtual void feedforward(const Eigen::VectorXf& input);
 
 	virtual bool load(std::string path);

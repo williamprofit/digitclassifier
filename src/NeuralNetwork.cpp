@@ -18,7 +18,7 @@ void NeuralNetwork::addLayer(const Layer& layer)
     m_layers.push_back(layer);
 }
 
-void NeuralNetwork::init()
+void NeuralNetwork::init(bool deepNetwork)
 {
     for (unsigned int i = 0; i < m_layers.size(); i++)
     {
@@ -26,7 +26,7 @@ void NeuralNetwork::init()
         if (i > 0)
             prevLayer = &m_layers[i-1];
 
-        m_layers[i].init(prevLayer);
+        m_layers[i].init(prevLayer, deepNetwork);
     }
 }
 

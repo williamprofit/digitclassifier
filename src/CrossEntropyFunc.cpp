@@ -36,9 +36,9 @@ void nanToNum(Eigen::VectorXf& vec)
 		if (std::isinf(vec(i)))
 		{
 			if (vec(i) < 0)
-				vec(i) = -1000000.0f;
+				vec(i) = -std::numeric_limits<float>::min();
 			else
-				vec(i) = +1000000.0f;
+				vec(i) = +std::numeric_limits<float>::max();
 		}
 	}
 }

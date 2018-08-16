@@ -12,7 +12,7 @@ public:
     virtual ~Layer();
 
     virtual void create(unsigned int size, ActivationFuncEnum activationFunc);
-    virtual void init(Layer* previousLayer);
+	virtual void init(Layer* previousLayer, bool deepNetwork = true);
 
     virtual void fire();
 
@@ -32,6 +32,9 @@ public:
     virtual void printActivation();
 
 protected:
+	virtual void initNormal();
+	virtual void initDeep();
+
     virtual void computeActivation();
     virtual void applyActivationFunc();
 

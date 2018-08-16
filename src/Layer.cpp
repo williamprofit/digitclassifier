@@ -1,5 +1,6 @@
 #include <Layer.h>
 #include <iostream>
+#include <random>
 
 using namespace Eigen;
 
@@ -23,16 +24,51 @@ void Layer::create(unsigned int size, ActivationFuncEnum activationFunc)
     m_activationFunc = activationFunc;
 }
 
-void Layer::init(Layer* previousLayer)
+void Layer::init(Layer* previousLayer, bool deepNetwork)
 {
     m_prevLayer = previousLayer;
     m_activations = VectorXf::Zero(m_size);
 
-    if (m_prevLayer != nullptr)
-    {
-        m_weights = MatrixXf::Random(m_size, m_prevLayer->getSize());
-        m_biases  = VectorXf::Random(m_size);
-    }
+	if (m_prevLayer == nullptr)
+		return;
+
+	if (deepNetwork)
+		this->initDeep();
+	else
+		this->initNormal();
+}
+
+void Layer::initNormal()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::normal_distribution<float> dist(0.0f, 1.0f);
+
+	m_weights = MatrixXf::Zero(m_size, m_prevLayer->getSize());
+
+	for (unsigned int i = 0; i < m_weights.size(); i++)
+		m_weights.data()[i] = dist(gen);
+
+
+	m_biases  = VectorXf::Random(m_size);
+}
+
+void Layer::initDeep()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	float deviation = std::sqrt(1.0f / m_prevLayer->getSize());
+	std::normal_distribution<float> dist(0.0f, deviation);
+
+	m_weights = MatrixXf::Zero(m_size, m_prevLayer->getSize());
+
+	for (unsigned int i = 0; i < m_weights.size(); i++)
+		m_weights.data()[i] = dist(gen);
+
+
+	m_biases = VectorXf::Random(m_size);
 }
 
 void Layer::fire()

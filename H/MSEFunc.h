@@ -4,8 +4,8 @@
 #include <LossFunc.h>
 
 
-Eigen::VectorXf MSE(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
-Eigen::VectorXf MSEDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+float MSE(float predicted, float expected);
+float MSEDerivative(float predicted, float expected);
 
 
 class MSEFunc : public LossFunc

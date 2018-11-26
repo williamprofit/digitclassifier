@@ -1,49 +1,19 @@
 #include <CrossEntropyFunc.h>
+
 #include <cmath>
+#include <limits>
 
-float myLog(float);
-void nanToNum(Eigen::VectorXf& vec);
 
-Eigen::VectorXf crossEntropy(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
+float crossEntropy(float predicted, float expected)
 {
-	Eigen::VectorXf ones(predicted.size());
-	ones.setOnes();
+	float value = -(expected * std::log(predicted) + (1 - expected) * std::log(1 - predicted));
 
-	Eigen::VectorXf error = -(expected.cwiseProduct(predicted.unaryExpr(&myLog)) + (ones - expected).cwiseProduct((ones - predicted).unaryExpr(&myLog)));
-	nanToNum(error);
-
-	return error;
+	return value;
 }
 
-Eigen::VectorXf crossEntropyDerivative(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected)
+float crossEntropyDerivative(float predicted, float expected)
 {
-	Eigen::VectorXf ones(predicted.size());
-	ones.setOnes();
+	float value = -(expected / predicted) + (1 - expected) / (1 - predicted);
 
-	Eigen::VectorXf derivative = -(expected.cwiseQuotient(predicted)) + (ones - expected).cwiseQuotient(ones - predicted);
-	nanToNum(derivative);
-
-	return derivative;
-}
-
-void nanToNum(Eigen::VectorXf& vec)
-{
-	for (unsigned int i = 0; i < vec.size(); i++)
-	{
-		if (std::isnan(vec(i)))
-			vec(i) = 0.0f;
-
-		if (std::isinf(vec(i)))
-		{
-			if (vec(i) < 0)
-				vec(i) = -std::numeric_limits<float>::min();
-			else
-				vec(i) = +std::numeric_limits<float>::max();
-		}
-	}
-}
-
-float myLog(float value)
-{
-	return std::log(value);
+	return value;
 }

@@ -140,6 +140,11 @@ ActivationFuncEnum Layer::getActivationFunc()
 	return m_activationFunc;
 }
 
+Layer* Layer::getPrevLayer()
+{
+	return m_prevLayer;
+}
+
 VectorXf& Layer::getBiases()
 {
 	return m_biases;

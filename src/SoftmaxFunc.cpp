@@ -1,7 +1,7 @@
 #include <SoftmaxFunc.h>
 #include <iostream>
 
-float myExp(float value);
+float myExp(float x);
 
 Eigen::VectorXf softmax(const Eigen::VectorXf& activation)
 {
@@ -27,7 +27,7 @@ Eigen::VectorXf softmaxDerivative(const Eigen::VectorXf& activation)
 }
 
 
-float myExp(float value)
+float myExp(float x)
 {
-	return std::exp(value);
+	return std::exp(x);
 }

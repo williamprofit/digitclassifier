@@ -1,7 +1,7 @@
 #include <TanhFunc.h>
 
-float singleTanh(float value);
-float squareTanh(float value);
+float singleTanh(float x);
+float singleTanhDerivative(float x);
 
 Eigen::VectorXf myTanh(const Eigen::VectorXf& activation)
 {
@@ -12,23 +12,18 @@ Eigen::VectorXf myTanh(const Eigen::VectorXf& activation)
 
 Eigen::VectorXf tanhDerivative(const Eigen::VectorXf& activation)
 {
-	//return 1.0f - std::pow(std::tanh(activation), 2);
-
-	Eigen::VectorXf ones(activation.size());
-	ones.setOnes();
-
-	Eigen::VectorXf v = ones - myTanh(activation).unaryExpr(&squareTanh);
+	Eigen::VectorXf v = activation.unaryExpr(&singleTanhDerivative);
 
 	return v;
 }
 
 
-float singleTanh(float value)
+float singleTanh(float x)
 {
-	return std::tanh(value);
+	return std::tanh(x);
 }
 
-float squareTanh(float value)
+float singleTanhDerivative(float x)
 {
-	return std::pow(value, 2.0f);
+	return 1.0f - std::pow(std::tanh(x), 2);
 }

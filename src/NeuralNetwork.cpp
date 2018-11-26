@@ -143,3 +143,15 @@ std::vector<Layer>* NeuralNetwork::getLayers()
 {
 	return &m_layers;
 }
+
+unsigned int NeuralNetwork::getParamCount()
+{
+	unsigned int paramCount = 0;
+	for (unsigned int i = 1; i < m_layers.size(); i++)
+	{
+		paramCount += m_layers[i].getWeights().size();
+		paramCount += m_layers[i].getBiases().size();
+	}
+
+	return paramCount;
+}

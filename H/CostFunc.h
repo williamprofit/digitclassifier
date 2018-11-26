@@ -13,17 +13,25 @@ public:
 	CostFunc(LossFuncEnum lossFunc);
 
 	virtual void computeCost(const std::vector<Eigen::VectorXf>& predicted, const std::vector<Eigen::VectorXf>& expected);
+	virtual void computeGradients(NeuralNetwork* nn);
 
-	virtual Eigen::VectorXf getCost();
-	virtual Eigen::VectorXf getCostGradient();
-	virtual float			getAverageCost();
+	virtual float&			 getCost();
+	virtual Eigen::VectorXf& getCostGradient();
+
+	virtual std::vector<Eigen::VectorXf>& getBiasGradients();
+	virtual std::vector<Eigen::MatrixXf>& getWeightGradients();
 
 	virtual void setLossFunc(LossFuncEnum lossFunc);
 
 protected:
-	Eigen::VectorXf m_cost;
+	virtual float computeCostForPrediction(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+	virtual Eigen::VectorXf computeCostGradientForPrediction(const Eigen::VectorXf& predicted, const Eigen::VectorXf& expected);
+
+	float			m_cost;
 	Eigen::VectorXf m_costGradient;
-	float			m_averageCost;
+
+	std::vector<Eigen::VectorXf> m_biasGradients;
+	std::vector<Eigen::MatrixXf> m_weightGradients;
 
 	LossFuncEnum m_lossFunc;
 };

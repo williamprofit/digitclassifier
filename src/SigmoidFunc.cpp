@@ -1,27 +1,30 @@
 #include <SigmoidFunc.h>
 #include <cmath>
 
-float singleSigmoid(float value);
+float singleSigmoid(float x);
+float singleSigmoidDerivative(float x);
 
 Eigen::VectorXf sigmoid(const Eigen::VectorXf& activation)
 {
-	Eigen::VectorXf a = activation.unaryExpr(&singleSigmoid);
+	Eigen::VectorXf v = activation.unaryExpr(&singleSigmoid);
 
-	return a;
+	return v;
 }
 
 Eigen::VectorXf sigmoidDerivative(const Eigen::VectorXf& activation)
 {
-	Eigen::VectorXf ones(activation.size());
-	ones.setOnes();
+	Eigen::VectorXf v = activation.unaryExpr(&singleSigmoidDerivative);
 
-	Eigen::VectorXf a = activation.unaryExpr(&singleSigmoid).cwiseProduct(ones - activation.unaryExpr(&singleSigmoid));
-
-	return a;
+	return v;
 }
 
 
-float singleSigmoid(float value)
+float singleSigmoid(float x)
 {
-	return 1.0f / (1.0f + std::exp(-value));
+	return 1.0f / (1.0f + std::exp(-x));
+}
+
+float singleSigmoidDerivative(float x)
+{
+	return singleSigmoid(x) * (1 - singleSigmoid(x));
 }

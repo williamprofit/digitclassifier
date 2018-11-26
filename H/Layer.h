@@ -28,6 +28,7 @@ public:
 	virtual Eigen::VectorXf& getBiases();
 	virtual unsigned int getSize();
 	virtual ActivationFuncEnum getActivationFunc();
+	virtual Layer* getPrevLayer();
 
     virtual void printActivation();
 
@@ -43,8 +44,11 @@ protected:
 
     ActivationFuncEnum m_activationFunc;
 
-	Eigen::VectorXf m_integrations; /* z = WX+b, integration of values sent to node */
-    Eigen::VectorXf m_activations;	/* a = g(z), where g is activationFunc */
+	/* z = WX+b, weighted sum of all previous neurons */
+	Eigen::VectorXf m_integrations; 
+	/* a = g(z), where g is activationFunc */
+    Eigen::VectorXf m_activations;
+
     Eigen::MatrixXf m_weights;
     Eigen::VectorXf m_biases;
 

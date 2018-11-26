@@ -91,8 +91,8 @@ VectorXf MNISTLoader::loadImageFromBytes(const std::vector<unsigned char>& bytes
 {
 	VectorXf image(nbRows * nbCols);
 
-	for (int i = 0; i < nbRows * nbCols; i++)
-		image[i] = (float)bytes[offset + i];
+	for (unsigned int i = 0; i < nbRows * nbCols; i++)
+		image.data()[i] = (float)bytes[offset + i];
 
 	return image;
 }

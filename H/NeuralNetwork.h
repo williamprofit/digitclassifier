@@ -22,6 +22,7 @@ public:
     virtual Eigen::VectorXf getOutput();
 
 	virtual std::vector<Layer>* getLayers();
+	virtual unsigned int getParamCount();
 
 protected:
 	virtual void loadLayer(std::ifstream& stream);

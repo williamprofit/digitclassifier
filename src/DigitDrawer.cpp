@@ -69,10 +69,14 @@ void DigitDrawer::manageKBInput()
 	{
 		m_canvas.clear();
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && std::clock() - m_enterTimer >= 100)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && std::clock() - m_enterTimer >= 1e5)
 	{
 		m_enterTimer = std::clock();
-		m_canvas.displayImage(m_mnist.getTestImages()[m_mnistIndex++], 28, 28);
+
+		if (++m_mnistIndex >= m_mnist.getTestImages().size())
+			m_mnistIndex = 0;
+
+		m_canvas.displayImage(m_mnist.getTestImages()[m_mnistIndex], 28, 28);
 	}
 }
 

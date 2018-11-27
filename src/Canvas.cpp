@@ -1,11 +1,13 @@
 #include <Canvas.h>
 
+using namespace Eigen;
+
 Canvas::Canvas()
 {
 	m_background.setFillColor(sf::Color::Black);
 	m_foreground.setFillColor(sf::Color::White);
 
-	m_brushRadius = 1.0f;
+	m_brushRadius = 0.5f;
 }
 
 Canvas::Canvas(float sizeX, float sizeY, float resolutionX, float resolutionY) : Canvas()
@@ -20,11 +22,15 @@ Canvas::~Canvas()
 
 void Canvas::draw(sf::RenderWindow& window)
 {
-	this->checkForClick(window);
+	this->manageClick(window);
 
 	m_background.setPosition(m_position);
 	window.draw(m_background);
+	this->drawPixels(window);
+}
 
+void Canvas::drawPixels(sf::RenderWindow& window)
+{
 	for (unsigned int x = 0; x < m_pixels.rows(); x++)
 	{
 		for (unsigned int y = 0; y < m_pixels.cols(); y++)
@@ -47,7 +53,7 @@ void Canvas::draw(sf::RenderWindow& window)
 	}
 }
 
-void Canvas::checkForClick(sf::Window& window)
+void Canvas::manageClick(sf::Window& window)
 {
 	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		return;
@@ -85,6 +91,34 @@ void Canvas::drawOnCanvas(float posX, float posY)
 			m_pixels(x, y) = std::min(1.0f, m_pixels(x, y) + ratio);
 		}
 	}
+}
+
+MatrixXf Canvas::softenLines(MatrixXf& pixels)
+{
+	// Use linear interpolation to soften lines
+	int range = 1;
+	MatrixXf newPixels = m_pixels;
+	for (int x = range; x < m_pixels.rows() - range; x++)
+	{
+		for (int y = range; y < m_pixels.cols() - range; y++)
+		{
+			float pixel = this->interpolate(m_pixels, x, y, range);
+			pixel /= std::pow(range * 2 + 1, 2);
+			newPixels(x, y) = pixel;
+		}
+	}
+
+	return newPixels;
+}
+
+float Canvas::interpolate(MatrixXf& mat, int x, int y, int range)
+{
+	float pixel = 0.0f;
+	for (int rx = -range; rx <= range; rx++)
+		for (int ry = -range; ry <= range; ry++)
+			pixel += mat(x + rx, y + ry);
+
+	return pixel;
 }
 
 bool Canvas::isClickInCanvas(const sf::Vector2i& clickPos)
@@ -151,19 +185,20 @@ void Canvas::setColorBackground(sf::Color color)
 	m_background.setFillColor(color);
 }
 
-void Canvas::displayImage(const Eigen::VectorXf& image, int sizeX, int sizeY)
+void Canvas::displayImage(const VectorXf& image, int sizeX, int sizeY)
 {
-	m_pixels = Eigen::Map<Eigen::MatrixXf>((float*)image.data(), sizeX, sizeY);
+	m_pixels = Map<MatrixXf>((float*)image.data(), sizeX, sizeY);
 }
 
-Eigen::MatrixXf& Canvas::getPixels()
+MatrixXf& Canvas::getPixels()
 {
 	return m_pixels;
 }
 
-Eigen::VectorXf Canvas::getPixelsAsVec()
+VectorXf Canvas::getPixelsAsVec()
 {
-	Eigen::VectorXf pixelsVec(Eigen::Map<Eigen::VectorXf>(m_pixels.data(), m_pixels.rows() * m_pixels.cols()));
+	MatrixXf pixels = this->softenLines(m_pixels);
+	VectorXf pixelsVec(Map<VectorXf>(pixels.data(), pixels.rows() * pixels.cols()));
 
 	return pixelsVec;
 }

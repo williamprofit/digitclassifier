@@ -29,9 +29,12 @@ public:
 	virtual Eigen::VectorXf getPixelsAsVec();
 
 protected:
-	virtual void checkForClick(sf::Window& window);
+	virtual void manageClick(sf::Window& window);
+	virtual void drawPixels(sf::RenderWindow& window);
 	virtual bool isClickInCanvas(const sf::Vector2i& clickPos);
 	virtual void drawOnCanvas(float posX, float posY);
+	virtual Eigen::MatrixXf softenLines(Eigen::MatrixXf& pixels);
+	virtual float interpolate(Eigen::MatrixXf& pixels, int x, int y, int range);
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_size;

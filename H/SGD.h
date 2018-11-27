@@ -58,4 +58,4 @@ protected:
 	unsigned int m_currentEpoch;
 };
 
-#endif SGD
+#endif

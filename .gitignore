@@ -1,2 +1,5 @@
 [Bb]uild
 notes.txt
+.DS_Store
+._.DS_Store
+*.swp

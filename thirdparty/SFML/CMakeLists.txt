@@ -32,9 +32,6 @@ endif()
 if(NOT CMAKE_OSX_ARCHITECTURES)
     set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "macOS architecture to build; 64-bit is expected" FORCE)
 endif()
-if(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.7" CACHE STRING "macOS deployement target; 10.7+ is expected" FORCE)
-endif()
 if(NOT CMAKE_OSX_SYSROOT)
     # query the path to the default SDK, will fail on non-macOS, but it's okay.
     execute_process(COMMAND xcodebuild -sdk macosx -version Path
@@ -53,7 +50,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake)
 # setup version numbers
 set(VERSION_MAJOR 2)
 set(VERSION_MINOR 5)
-set(VERSION_PATCH 0)
+set(VERSION_PATCH 1)
 
 # add an option for choosing the build type (shared or static)
 if(NOT (SFML_OS_IOS OR SFML_OS_ANDROID))
@@ -260,37 +257,8 @@ if(SFML_OS_MACOSX)
         message(FATAL_ERROR "Only 64-bit architecture is supported")
     endif()
 
-    # Ensure macOS 10.7+ is used
-    if(CMAKE_OSX_DEPLOYMENT_TARGET VERSION_LESS "10.7")
-        message(FATAL_ERROR "macOS 10.7 or greater is required for the deployment target.")
-    endif()
-
     # configure Xcode templates
     set(XCODE_TEMPLATES_ARCH "\$(NATIVE_ARCH_ACTUAL)")
-endif()
-
-if(SFML_OS_LINUX OR SFML_OS_FREEBSD OR SFML_OS_OPENBSD)
-    set(PKGCONFIG_DIR lib${LIB_SUFFIX}/pkgconfig)
-    if(SFML_OS_FREEBSD OR SFML_OS_OPENBSD)
-        set(PKGCONFIG_DIR libdata/pkgconfig)
-    endif()
-    if(BUILD_SHARED_LIBS)
-        sfml_set_option(SFML_INSTALL_PKGCONFIG_FILES FALSE BOOL "TRUE to automatically install pkg-config files so other projects can find SFML")
-        if(SFML_INSTALL_PKGCONFIG_FILES)
-            foreach(sfml_module IN ITEMS all system window graphics audio network)
-                CONFIGURE_FILE(
-                    "tools/pkg-config/sfml-${sfml_module}.pc.in"
-                    "tools/pkg-config/sfml-${sfml_module}.pc"
-                    @ONLY)
-                INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/tools/pkg-config/sfml-${sfml_module}.pc"
-                    DESTINATION "${CMAKE_INSTALL_PREFIX}/${PKGCONFIG_DIR}")
-            endforeach()
-        endif()
-    else()
-        if(SFML_INSTALL_PKGCONFIG_FILES)
-            message(WARNING "No pkg-config files are provided for the static SFML libraries (SFML_INSTALL_PKGCONFIG_FILES will be ignored).")
-        endif()
-    endif()
 endif()
 
 # enable project folders
@@ -306,16 +274,25 @@ if(SFML_BUILD_DOC)
     add_subdirectory(doc)
 endif()
 
-sfml_set_option(SFML_INSTALL_PKGCONFIG_FILES FALSE BOOL "TRUE to automatically install pkg-config files so other projects can find SFML")
+# on Linux and BSD-like OS, install pkg-config files by default
+set(SFML_INSTALL_PKGCONFIG_DEFAULT FALSE)
 
-if(SFML_OS_SUPPORTS_PKGCONFIG OR SFML_INSTALL_PKGCONFIG_FILES)
+if(SFML_OS_LINUX OR SFML_OS_FREEBSD OR SFML_OS_OPENBSD)
+    set(SFML_INSTALL_PKGCONFIG_DEFAULT TRUE)
+endif()
+
+sfml_set_option(SFML_INSTALL_PKGCONFIG_FILES ${SFML_INSTALL_PKGCONFIG_DEFAULT} BOOL "TRUE to automatically install pkg-config files so other projects can find SFML")
+
+if(SFML_INSTALL_PKGCONFIG_FILES)
+    sfml_set_option(SFML_PKGCONFIG_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${SFML_PKGCONFIG_DIR}" PATH "Install directory for SFML's pkg-config .pc files")
+
     foreach(sfml_module IN ITEMS all system window graphics audio network)
         CONFIGURE_FILE(
             "tools/pkg-config/sfml-${sfml_module}.pc.in"
             "tools/pkg-config/sfml-${sfml_module}.pc"
             @ONLY)
         INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/tools/pkg-config/sfml-${sfml_module}.pc"
-            DESTINATION "${CMAKE_INSTALL_PREFIX}/${SFML_OS_PKGCONFIG_DIR}")
+            DESTINATION "${SFML_PKGCONFIG_INSTALL_PREFIX}")
     endforeach()
 endif()
 

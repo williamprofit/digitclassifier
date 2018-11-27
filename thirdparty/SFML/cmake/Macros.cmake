@@ -1,7 +1,12 @@
 include(CMakeParseArguments)
 
+# This little macro lets you set any Xcode specific property
+macro (sfml_set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+    set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
+endmacro ()
+
 # set the appropriate standard library on each platform for the given target
-# ex: sfml_set_stdlib(sfml-system)
+# example: sfml_set_stdlib(sfml-system)
 function(sfml_set_stdlib target)
     # for gcc >= 4.0 on Windows, apply the SFML_USE_STATIC_STD_LIBS option if it is enabled
     if(SFML_OS_WINDOWS AND SFML_COMPILER_GCC AND NOT SFML_GCC_VERSION VERSION_LESS "4")
@@ -14,7 +19,7 @@ function(sfml_set_stdlib target)
 
     if (SFML_OS_MACOSX)
         if (${CMAKE_GENERATOR} MATCHES "Xcode")
-            set_property(TARGET ${target} PROPERTY XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libc++")
+            sfml_set_xcode_property(${target} CLANG_CXX_LIBRARY "libc++")
         else()
             target_compile_options(${target} PRIVATE "-stdlib=libc++")
             target_link_libraries(${target} PRIVATE "-stdlib=libc++")
@@ -23,9 +28,9 @@ function(sfml_set_stdlib target)
 endfunction()
 
 # add a new target which is a SFML library
-# ex: sfml_add_library(sfml-graphics
-#                      SOURCES sprite.cpp image.cpp ...
-#                      [STATIC]) # Always create a static library and ignore BUILD_SHARED_LIBS
+# example: sfml_add_library(sfml-graphics
+#                           SOURCES sprite.cpp image.cpp ...
+#                           [STATIC]) # Always create a static library and ignore BUILD_SHARED_LIBS
 macro(sfml_add_library target)
 
     # parse the arguments
@@ -178,11 +183,11 @@ macro(sfml_add_library target)
 endmacro()
 
 # add a new target which is a SFML example
-# ex: sfml_add_example(ftp
-#                      SOURCES ftp.cpp ...
-#                      BUNDLE_RESOURCES MainMenu.nib ...    # Files to be added in target but not installed next to the executable
-#                      DEPENDS sfml-network
-#                      RESOURCES_DIR resources)             # A directory to install next to the executable and sources
+# example: sfml_add_example(ftp
+#                           SOURCES ftp.cpp ...
+#                           BUNDLE_RESOURCES MainMenu.nib ...    # Files to be added in target but not installed next to the executable
+#                           DEPENDS sfml-network
+#                           RESOURCES_DIR resources)             # A directory to install next to the executable and sources
 macro(sfml_add_example target)
 
     # parse the arguments
@@ -320,7 +325,7 @@ function(sfml_export_targets)
     if (SFML_BUILD_FRAMEWORKS)
         set(config_package_location "SFML.framework/Resources/CMake")
     else()
-        set(config_package_location lib/cmake/SFML)
+        set(config_package_location lib${LIB_SUFFIX}/cmake/SFML)
     endif()
     configure_package_config_file("${CURRENT_DIR}/SFMLConfig.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/SFMLConfig.cmake"
         INSTALL_DESTINATION "${config_package_location}")

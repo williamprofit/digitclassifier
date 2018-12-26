@@ -15,19 +15,19 @@ NeuralNetwork::~NeuralNetwork()
 
 void NeuralNetwork::addLayer(const Layer& layer)
 {
-    m_layers.push_back(layer);
+  m_layers.push_back(layer);
 }
 
 void NeuralNetwork::init(bool deepNetwork)
 {
-    for (unsigned int i = 0; i < m_layers.size(); i++)
-    {
-        Layer* prevLayer = nullptr;
-        if (i > 0)
-            prevLayer = &m_layers[i-1];
+  for (unsigned int i = 0; i < m_layers.size(); i++)
+  {
+    Layer* prevLayer = nullptr;
+    if (i > 0)
+      prevLayer = &m_layers[i-1];
 
-        m_layers[i].init(prevLayer, deepNetwork);
-    }
+    	m_layers[i].init(prevLayer, deepNetwork);
+  }
 }
 
 void NeuralNetwork::feedforward(const VectorXf& input)
@@ -38,10 +38,10 @@ void NeuralNetwork::feedforward(const VectorXf& input)
 		return;
 	}
 
-    m_layers[0].setActivation(input);
+  m_layers[0].setActivation(input);
 
-    for (unsigned int i = 1; i < m_layers.size(); i++)
-        m_layers[i].fire();
+  for (unsigned int i = 1; i < m_layers.size(); i++)
+    m_layers[i].fire();
 }
 
 bool NeuralNetwork::load(std::string path)
@@ -110,7 +110,7 @@ bool NeuralNetwork::save(std::string path)
 
 	uint32_t layerCount = (uint32_t)m_layers.size();
 	file.write((char*)&layerCount, sizeof(layerCount));
-	
+
 	for (uint32_t i = 0; i < layerCount; i++)
 		this->saveLayer(file, &m_layers[i]);
 
@@ -133,10 +133,10 @@ void NeuralNetwork::saveLayer(std::ofstream& stream, Layer* layer)
 
 VectorXf NeuralNetwork::getOutput()
 {
-    if (m_layers.size() == 0)
-        return VectorXf::Zero(1);
+  if (m_layers.size() == 0)
+    return VectorXf::Zero(1);
 
-    return m_layers.back().getActivation();
+  return m_layers.back().getActivation();
 }
 
 std::vector<Layer>* NeuralNetwork::getLayers()

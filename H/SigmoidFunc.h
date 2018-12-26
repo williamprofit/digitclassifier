@@ -11,11 +11,11 @@ Eigen::VectorXf sigmoidDerivative(const Eigen::VectorXf& activation);
 class SigmoidFunc : public ActivationFunc
 {
 public:
-    SigmoidFunc()
-    {
-        func = &sigmoid;
-        derivative = &sigmoidDerivative;
-    }
+  SigmoidFunc()
+  {
+    func = &sigmoid;
+    derivative = &sigmoidDerivative;
+  }
 };
 
 #endif

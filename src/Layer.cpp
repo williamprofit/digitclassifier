@@ -10,7 +10,7 @@ Layer::Layer() : m_prevLayer(nullptr)
 
 Layer::Layer(unsigned int size, ActivationFuncEnum activationFunc)
 {
-    this->create(size, activationFunc);
+  this->create(size, activationFunc);
 }
 
 Layer::~Layer()
@@ -20,14 +20,14 @@ Layer::~Layer()
 
 void Layer::create(unsigned int size, ActivationFuncEnum activationFunc)
 {
-    m_size = size;
-    m_activationFunc = activationFunc;
+  m_size = size;
+  m_activationFunc = activationFunc;
 }
 
 void Layer::init(Layer* previousLayer, bool deepNetwork)
 {
-    m_prevLayer = previousLayer;
-    m_activations = VectorXf::Zero(m_size);
+  m_prevLayer = previousLayer;
+  m_activations = VectorXf::Zero(m_size);
 
 	if (m_prevLayer == nullptr)
 		return;
@@ -73,10 +73,10 @@ void Layer::initDeep()
 
 void Layer::fire()
 {
-    if (m_prevLayer == nullptr)
-        return;
-    else
-        this->computeActivation();
+  if (m_prevLayer == nullptr)
+    return;
+  else
+    this->computeActivation();
 }
 
 void Layer::computeActivation()
@@ -117,7 +117,7 @@ void Layer::setPrevLayer(Layer* prevLayer)
 
 unsigned int Layer::getSize()
 {
-    return m_size;
+  return m_size;
 }
 
 VectorXf& Layer::getIntegration()
@@ -127,7 +127,7 @@ VectorXf& Layer::getIntegration()
 
 VectorXf& Layer::getActivation()
 {
-    return m_activations;
+  return m_activations;
 }
 
 MatrixXf& Layer::getWeights()
@@ -152,5 +152,5 @@ VectorXf& Layer::getBiases()
 
 void Layer::printActivation()
 {
-    std::cout << m_activations << std::endl;
+  std::cout << m_activations << std::endl;
 }

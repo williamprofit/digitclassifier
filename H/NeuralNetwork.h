@@ -8,18 +8,18 @@
 class NeuralNetwork
 {
 public:
-    NeuralNetwork();
-    virtual ~NeuralNetwork();
+  NeuralNetwork();
+  virtual ~NeuralNetwork();
 
-    virtual void addLayer(const Layer& layer);
+  virtual void addLayer(const Layer& layer);
 
-    virtual void init(bool deepNetwork = true);
-    virtual void feedforward(const Eigen::VectorXf& input);
+  virtual void init(bool deepNetwork = true);
+  virtual void feedforward(const Eigen::VectorXf& input);
 
 	virtual bool load(std::string path);
 	virtual bool save(std::string path);
 
-    virtual Eigen::VectorXf getOutput();
+  virtual Eigen::VectorXf getOutput();
 
 	virtual std::vector<Layer>* getLayers();
 	virtual unsigned int getParamCount();
@@ -28,7 +28,7 @@ protected:
 	virtual void loadLayer(std::ifstream& stream);
 	virtual void saveLayer(std::ofstream& stream, Layer* layer);
 
-    std::vector<Layer> m_layers;
+  std::vector<Layer> m_layers;
 };
 
 #endif

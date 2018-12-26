@@ -6,8 +6,8 @@
 class ActivationFunc
 {
 public:
-    Eigen::VectorXf (*func)(const Eigen::VectorXf&) = nullptr;
-    Eigen::VectorXf (*derivative)(const Eigen::VectorXf&) = nullptr;
+  Eigen::VectorXf (*func)(const Eigen::VectorXf&) = nullptr;
+  Eigen::VectorXf (*derivative)(const Eigen::VectorXf&) = nullptr;
 };
 
 #endif

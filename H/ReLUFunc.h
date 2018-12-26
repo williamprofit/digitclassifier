@@ -11,11 +11,11 @@ Eigen::VectorXf ReLUDerivative(const Eigen::VectorXf& activation);
 class ReLUFunc : public ActivationFunc
 {
 public:
-    ReLUFunc()
-    {
-        func = &ReLU;
-        derivative = & ReLUDerivative;
-    }
+  ReLUFunc()
+  {
+    func = &ReLU;
+    derivative = & ReLUDerivative;
+  }
 };
 
 #endif
